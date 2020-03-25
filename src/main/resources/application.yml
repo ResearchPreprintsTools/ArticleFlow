@@ -4,11 +4,22 @@ spring:
 
 ---
 spring:
+  security:
+    user:
+      name: admin
+      password: admin
   profiles: "dev"
   boot:
     admin:
       client:
         url: "http://localhost:8080"
+        username: admin
+        password: admin
+        instance:
+          metadata:
+            user:
+              name: admin
+              password: admin
 management:
   endpoint:
     health:

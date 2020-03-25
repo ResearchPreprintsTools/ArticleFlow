@@ -102,6 +102,10 @@
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>${spring.admin}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -7,19 +7,19 @@ spring:
   security:
     user:
       name: admin
-      password: admin
+      password: fuckingashole551
   profiles: "dev"
   boot:
     admin:
       client:
-        url: "http://localhost:8080"
+        url: "https://articleflow.herokuapp.com/"
         username: admin
-        password: admin
+        password: fuckingashole551
         instance:
           metadata:
             user:
               name: admin
-              password: admin
+              password: fuckingashole551
 management:
   endpoint:
     health:

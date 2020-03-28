@@ -1,8 +1,9 @@
 package dev.olegthelilfix.articleflow.data
 
 import com.beust.jcommander.Parameter
+import org.telegram.telegrambots.meta.api.objects.Update
 
-class BotArguments {
+class BotArguments(val update: Update) {
     @Parameter
     lateinit var command: String
 

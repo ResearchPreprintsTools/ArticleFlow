@@ -1,15 +1,11 @@
 package dev.olegthelilfix.articleflow.conf
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.PropertySource
+
 
 @Configuration
-@PropertySource("classpath:settings.properties")
 class TelegramBotSettings {
-    @Value("\${telegram.botUserName}")
-    lateinit var botUserName: String
+    val botUserName: String = System.getenv()["BOT"] ?: throw kotlin.RuntimeException("Bot name has not been found")
 
-    @Value("\${telegram.botToken}")
-    lateinit var token: String
+    val token: String = System.getenv()["TOKEN"] ?: throw kotlin.RuntimeException("Bot token has not been found")
 }

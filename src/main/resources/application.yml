@@ -1,18 +1,30 @@
 spring:
   profiles:
-    active: "dev"
+    active: ${ACTIVE_PROFILE}
 
 ---
 spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   security:
     user:
       name: admin
-      password: admin
+      password: ${ADMIN_PASSWORD}
   profiles: "dev"
   boot:
     admin:
       client:
-        url: "http://localhost:8080"
+        url: http://localhost:8080
         username: admin
         password: admin
         instance:
@@ -20,6 +32,47 @@ spring:
             user:
               name: admin
               password: admin
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: 8080
+
+---
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  security:
+    user:
+      name: admin
+      password: ${ADMIN_PASSWORD}
+  profiles: "production"
+  boot:
+    admin:
+      client:
+        url: ${ADMIN_URL}
+        username: admin
+        password: ${ADMIN_PASSWORD}
+        instance:
+          metadata:
+            user:
+              name: admin
+              password: ${ADMIN_PASSWORD}
 management:
   endpoint:
     health:

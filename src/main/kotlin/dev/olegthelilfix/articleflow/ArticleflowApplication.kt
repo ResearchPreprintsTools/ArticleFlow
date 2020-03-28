@@ -8,6 +8,7 @@ import org.springframework.boot.runApplication
 @EnableAdminServer
 class ArticleflowApplication
 
+@SuppressWarnings("SpreadOperator")
 fun main(args: Array<String>) {
     runApplication<ArticleflowApplication>(*args)
 }

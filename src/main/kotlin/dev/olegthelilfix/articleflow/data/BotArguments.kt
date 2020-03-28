@@ -19,5 +19,6 @@ class BotArguments {
     var andNot: List<String> = mutableListOf()
 
     @Parameter(names = ["-m", "--max"], description = "max result for request")
+    @SuppressWarnings("MagicNumber")
     var maxResult = 10
 }

@@ -3,6 +3,7 @@ package dev.olegthelilfix.articleflow.utils
 import com.beust.jcommander.JCommander
 import dev.olegthelilfix.articleflow.data.BotArguments
 
+@SuppressWarnings("SpreadOperator")
 fun parseParams(args: String): BotArguments {
     val botArguments = BotArguments()
     val argv: Array<String> = args.split(" ").toTypedArray()

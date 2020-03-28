@@ -38,7 +38,7 @@ class TelegramBotService(private val telegramBotSettings: TelegramBotSettings,
     override fun getBotToken() = telegramBotSettings.token
 
     private fun Update.sendMessage(text: String): Message {
-        val message: SendMessage = SendMessage(this.message.chatId, text).setParseMode("Markdown")
+        val message: SendMessage = SendMessage(this.message.chatId, text).setParseMode("html")
 
         return execute(message)
     }

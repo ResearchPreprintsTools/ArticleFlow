@@ -1,6 +1,5 @@
 package dev.olegthelilfix.articleflow.data
 
-import java.sql.Time
 import java.sql.Timestamp
 import javax.persistence.*
 

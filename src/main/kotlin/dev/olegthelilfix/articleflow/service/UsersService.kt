@@ -11,6 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 import java.util.concurrent.TimeUnit
 
 @Service
+@SuppressWarnings("MagicNumber")
 class UsersService (private val userRepository: UserRepository) {
     private val cache: LoadingCache<TelegramUser, ServiceUser> = CacheBuilder.newBuilder()
             .expireAfterWrite(60, TimeUnit.MINUTES)

@@ -1,17 +1,19 @@
 package dev.olegthelilfix.articleflow.service.operations
 
-import dev.arxiv.name.data.Feed
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.ObjectMapper
 import dev.arxiv.name.options.SearchField
 import dev.arxiv.name.options.SortBy
 import dev.arxiv.name.options.SortOrder
 import dev.arxiv.name.requests.SearchRequest
-import dev.arxiv.name.requests.SearchRequestExecutor
 import dev.olegthelilfix.articleflow.data.BotArguments
-import dev.olegthelilfix.articleflow.utils.entryToMessage
+import dev.olegthelilfix.articleflow.service.FollowArticleService
+import dev.olegthelilfix.articleflow.service.UsersService
 import org.springframework.stereotype.Component
 
 @Component
-class SearchOperation : BotOperation() {
+class FollowArticleOperation(private val usersService: UsersService,
+                             private val followArticle: FollowArticleService) : BotOperation() {
     override fun execute(args: BotArguments): List<String> {
         val request = SearchRequest.SearchRequestBuilder
                 .create(args.valueToSearch, SearchField.ALL)
@@ -23,10 +25,12 @@ class SearchOperation : BotOperation() {
         args.or.forEach { request.and(it, SearchField.ALL) }
         args.andNot.forEach { request.and(it, SearchField.ALL) }
 
-        val response: Feed = SearchRequestExecutor().executeAndMap(request.build())
+        if (followArticle.addFollowing(usersService.loadOrCreateUser(args.update), request, args.update.message.chatId)) {
+            return listOf("DONE")
+        }
 
-        return response.entry?.map { entryToMessage(it) } ?: listOf("Not found")
+        return listOf("FAILED")
     }
 
-    override fun getName(): String = "/search"
+    override fun getName(): String = "/follow"
 }

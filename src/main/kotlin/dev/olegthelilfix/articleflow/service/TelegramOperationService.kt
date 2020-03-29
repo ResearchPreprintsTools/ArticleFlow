@@ -1,5 +1,6 @@
 package dev.olegthelilfix.articleflow.service
 
+import dev.olegthelilfix.articleflow.service.operations.BotOperation
 import dev.olegthelilfix.articleflow.service.operations.ErrorOperation
 import dev.olegthelilfix.articleflow.utils.parseParams
 import org.springframework.stereotype.Service
@@ -11,7 +12,7 @@ class TelegramOperationService(telegramOperation : List<BotOperation>, private v
     private val operations: Map<String, BotOperation> = telegramOperation.stream().collect(Collectors.toMap({it.getName()}, {it}))
 
     fun executeOperation(update: Update): List<String> {
-        val args = parseParams(update.message.text)
+        val args = parseParams(update)
 
         return operations.getOrDefault(args.command, errorOperation).execute(args)
     }

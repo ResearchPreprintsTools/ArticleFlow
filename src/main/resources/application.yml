@@ -4,6 +4,18 @@ spring:
 
 ---
 spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+    url: jdbc:postgresql://ec2-46-137-84-173.eu-west-1.compute.amazonaws.com:5432/d9ot63stsbv4pb
+    username: jkytezcdqcqszq
+    password: 9c3cca2c6f46a6aefa5fb699a878f5aa6c24b947ac66ffbd3b1d5451114d50a8
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   security:
     user:
       name: admin
@@ -30,3 +42,4 @@ management:
         include: "*"
   server:
     port: 8080
+
